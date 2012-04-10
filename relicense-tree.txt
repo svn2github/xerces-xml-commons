@@ -1,0 +1,90 @@
+See the re-license procedure at cvs://committers/relicense/src/perl/
+------------------------------------------------------------------------
+Mark sections which have had the licence applied,
+using a code in the left-hand column:
+L = The AL-2.0 license is applied
+N = Do not apply any license here - foreign stuff or not needed
+* = There are issues to be addressed
+------------------------------------------------------------------------
+     .
+     |   |-- docs
+     |   |-- etc
+     |   |-- external
+     |   |   |-- src
+     |   |   |   |-- javax
+     |   |   |   |   `-- xml
+     |   |   |   |       |-- parsers
+     |   |   |   |       `-- transform
+     |   |   |   |           |-- dom
+     |   |   |   |           |-- sax
+     |   |   |   |           `-- stream
+     |   |   |   `-- org
+     |   |   |       |-- apache
+     |   |   |       |   `-- xmlcommons
+     |   |   |       |-- w3c
+     |   |   |       |   `-- dom
+     |   |   |       |       |-- css
+     |   |   |       |       |-- events
+     |   |   |       |       |-- html
+     |   |   |       |       |-- ranges
+     |   |   |       |       |-- stylesheets
+     |   |   |       |       |-- traversal
+     |   |   |       |       `-- views
+     |   |   |       `-- xml
+     |   |   |           `-- sax
+     |   |   |               |-- ext
+     |   |   |               `-- helpers
+     |   |   `-- xdocs
+     |   |       |-- dom
+     |   |       |   |-- core
+     |   |       |   |   |-- idl
+     |   |       |   |   `-- images
+     |   |       |   |-- events
+     |   |       |   |   |-- idl
+     |   |       |   |   `-- images
+     |   |       |   |-- style
+     |   |       |   |   |-- idl
+     |   |       |   |   `-- images
+     |   |       |   |-- traversal-range
+     |   |       |   |   |-- idl
+     |   |       |   |   `-- images
+     |   |       |   |-- views
+     |   |       |   |   |-- idl
+     |   |       |   |   `-- images
+     |   |       |   `-- xml
+     |   |       |       |-- core
+     |   |       |       |   `-- definitions
+     |   |       |       |-- events
+     |   |       |       |   `-- definitions
+     |   |       |       |-- style
+     |   |       |       |   `-- definitions
+     |   |       |       |-- traversal-range
+     |   |       |       `-- views
+     |   |       `-- sax
+     |   |-- src
+     |   |   `-- org
+     |   |       `-- apache
+     |   |           |-- env
+     |   |           `-- xml
+     |   |               `-- resolver
+     |   |                   |-- apps
+     |   |                   |-- helpers
+     |   |                   |-- readers
+     |   |                   `-- tools
+L    |   `-- tests
+L    |       `-- resolver
+L    |           |-- catalogs
+L    |           |-- dtds
+L    |           `-- src
+L    `-- src
+L        `-- documentation
+L            |-- content
+L            |   |-- components
+L            |   |   `-- resolver
+L            |   `-- xdocs
+L            |       `-- components
+L            |           |-- external
+*L           |           |-- resolver    # does it need Ack Sun ?
+L            |           `-- which
+L            `-- resources
+L                `-- images

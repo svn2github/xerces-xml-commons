@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl"?>
+<rdf:RDF xml:lang="en"
+         xmlns="http://usefulinc.com/ns/doap#" 
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+         xmlns:asfext="http://projects.apache.org/ns/asfext#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+  <Project rdf:about="http://xml.apache.org/commons/components/external/">
+    <created>2007-06-06</created>
+    <license rdf:resource="http://usefulinc.com/doap/licenses/asl20" />
+    <name>Apache XML Commons External</name>
+    <homepage rdf:resource="http://xml.apache.org/commons/components/external/" />
+    <asfext:pmc rdf:resource="http://xerces.apache.org" />
+    <shortdesc>Apache XML Commons External provides an Apache-hosted set of SAX, DOM and JAXP interfaces for use in other xml-based projects.</shortdesc>
+    <description>The External components portion of Apache XML Commons contains interfaces that are defined by external standards organizations. For DOM, that's the W3C; for SAX it's David Megginson (http://www.saxproject.org); for JAXP it's Sun. While we could send users to each of the primary sources for these deliverables, keeping our own versions of these in the XML Commons repository gives us a number of advantages: 1) Simplicity of downloads; users get the whole product from one place, 2) Better version control; we can only take fixes we want and add Apache-specific changes, 3) Better overview documentation of how these interfaces fit into the XML processing world, 4) More chance for cross-project community building within Apache projects.</description>
+    <bug-database rdf:resource="http://issues.apache.org/bugzilla/buglist.cgi?product=xmlcommons" />
+    <mailing-list rdf:resource="http://xerces.apache.org/mail.html#xml-commons-dev" />
+    <download-page rdf:resource="http://xerces.apache.org/mirrors.cgi" />
+    <programming-language>Java</programming-language>
+    <category rdf:resource="http://projects.apache.org/category/xml" />
+    <release>
+      <Version>
+        <name>External</name>
+        <created>2009-12-15</created>
+        <revision>1.4.01</revision>
+      </Version>
+    </release>
+    <release>
+      <Version>
+        <name>External</name>
+        <created>2009-12-15</created>
+        <revision>1.3.05</revision>
+      </Version>
+    </release>
+    <release>
+      <Version>
+        <name>External</name>
+        <created>2006-11-22</created>
+        <revision>1.3.04</revision>
+      </Version>
+    </release>
+    <release>
+      <Version>
+        <name>External</name>
+        <created>2009-12-15</created>
+        <revision>1.2.06</revision>
+      </Version>
+    </release>
+    <repository>
+      <SVNRepository>
+        <location rdf:resource="http://svn.apache.org/repos/asf/xml/commons/"/>
+        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/xml/commons/"/>
+      </SVNRepository>
+    </repository>
+    <maintainer>
+      <foaf:Person>
+        <foaf:name>XML Commons Development Team</foaf:name>
+          <foaf:mbox rdf:resource="mailto:mailto:commons-dev@xml.apache.org"/>
+      </foaf:Person>
+    </maintainer>
+    <asfext:implements><asfext:Standard>
+      <asfext:title>Java API for XML Processing (JAXP) 1.4</asfext:title>
+      <asfext:body>JCP</asfext:body>
+      <asfext:id>JSR 206</asfext:id>
+      <asfext:url rdf:resource="http://jcp.org/en/jsr/detail?id=206"/>
+    </asfext:Standard></asfext:implements>
+    <asfext:implements><asfext:Standard>
+      <asfext:title>Streaming API for XML (StAX) 1.0</asfext:title>
+      <asfext:body>JCP</asfext:body>
+      <asfext:id>JSR 173</asfext:id>
+      <asfext:url rdf:resource="http://jcp.org/en/jsr/detail?id=173"/>
+    </asfext:Standard></asfext:implements>
+  </Project>
+</rdf:RDF>

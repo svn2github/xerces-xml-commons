@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "document-v12.dtd">
+<document> 
+  <header> 
+    <title>Welcome to xml-commons</title> 
+  </header> 
+  <body> 
+    <section id="overview">
+      <title>Overview</title>
+<p>xml-commons is focussed on common code and guidelines for xml projects.
+The first focus will be to organize and have common packaging for the various
+externally-defined standards code relating to XML - things like the DOM, SAX,
+and JAXP interfaces.</p>
+<p>As the xml-commons community forms, we also hope to serve as a holding area
+for other common xml-related utilities and code, and to help promulgate common
+packaging, testing, documentation, and other guidelines across all
+xml.apache.org subprojects.</p>
+    </section>
+    <!--section id="news">
+      <title>News and events</title>
+      <ul>
+        <li>
+          <link href="http://apachecon.com/">ApacheCon
+          US 2005</link> -
+          took place in San Diego,
+          California, USA on 10-14 December 2005.
+          ApacheCon is the conference for all
+          things Apache. ApacheCon is a place to learn about a range of new
+          technologies, meet some Apache folks and share the knowledge.
+        </li>
+      </ul>
+    </section-->
+
+    <section id="guidelines">
+      <title>Commons Guidelines</title>
+<p>As the community forms, we need to formalize these guidelines, especially
+to differentiate "requirements" from suggested "guidelines".</p>
+<p>Shane's starting proposals:</p>
+<p>xml-commons is an unusual project in several ways.</p>
+<p>First, it encompasses two kinds of code: External and Apache.</p>
+<p>Secondly,
+xml-commons mainly focuses on providing code and services to other
+xml.apache.org projects instead of shipping it's own 'standalone' project.
+</p>
+<p>Third, it will also tend to be more focussed on smaller, interoperable modules of
+code and a very high degree of stability.</p>
+<p>In some ways, the forming of
+xml-commons is the seed of a catalyst to improve cross-project coordination
+throughout xml.apache.org.  One potential goal is to get all xml.apache.org
+projects to take their xml standards oriented code - like DOM, SAX and JAXP -
+from specific marked builds of xml-commons, instead of each project
+using different versions of these files.</p>
+<p><strong>External code:</strong> xml-commons will serve as an Apache-controlled
+copy of externally-defined standards-based files.  This way, we can try
+to manage common versions of these important xml standards-based files
+and interfaces. <link href="#external">Read more</link>.</p>
+<p><strong>Apache code:</strong> xml-commons will serve as a shared repository for
+common xml-oriented utilities or building blocks that several other
+xml.apache.org projects wish to use.  The first example is org.apache.env.Which, 
+and environment checking utility that scans your environment and reports common
+versions of xml-related files.  The next likely submission is an entity resolver 
+that could be plugged into any xml parsing, transforming, or processing
+project.  <link href="#java">Read more</link>.</p>
+<p>Directory tree (proposed)</p>
+
+<fixme author="open">This needs to be updated to reflect the current tree.
+It also needs to go into a section of its own or perhaps a separate document.
+</fixme>
+
+<source><![CDATA[
+xml-commons/
+    README.html - this file
+    build.xml - overall build file for top-level items
+    xdocs/ - top-level xml format docs about this project itself and our guidelines
+        (in whatever format xml.apache.org uses for site)
+
+    docs/ - (not checked in) html format docs created by 'build docs' from xdocs
+    java/ - root of all java-related files
+
+        external/ - src root of all source files in java that come from external sources
+            for example: the DOM, SAX, and JAXP files
+            org/xml/sax/*
+            org/w3c/dom/*
+            javax/xml/*
+        external/build.xml - Ant build file for all external sources
+
+        xdocs/ - xml format docs describing any java files, as needed
+
+        {name}.xml - Ant build file for Apache-defined subproject(s)
+            future: resolver.xml: for Norm Walsh's entity resolver submission, when done
+
+        src/ - root of Apache-defined Java code
+            src/org/apache/... etc
+
+        which.xml - Ant build file for org.apache.env.Which utility
+
+
+    c/ - root of all C/C++ related files
+        external/ - root of all externally-owned C/C++ sources
+
+    perl/ - root of all Perl related files
+        etc.
+]]></source>
+<ul>
+<li>We should consider adopting those guidelines from the <link href="http://jakarta.apache.org/commons/">jakarta-commons</link>
+project that make sense for our xml projects - keeping in mind that both the kind of
+projects we build are different than jakarta, and some of our goals are a
+little bit different.</li>
+<li>Dicsussion and buy-in should happen on the project mailing list
+<strong>before</strong> checking in new modules.</li>
+<li>New modules generally shouldn't go in until at least two separate
+other projects express interest in using the module.  I think this is an
+important difference from jakarta-commons that makes sense in our world.
+I.e. I'd rather not just throw something in because it seems like it might
+be useful, I'd rather only put things in that we know will be shared among
+multiple projects.</li>
+<li>The xml-commons community should come up with guidelines for other
+xml.apache.org subprojects to use the code that commons has. I.e. suggestions
+and ways to package this code vis-a-vis the other project's code in a common way.</li>
+<li>Other shared xml.apache.org guidelines? Like documentation format, testing techniques/policies, etc.</li>
+</ul>
+    </section>
+
+    <section id="external">
+      <title>External code: DOM, SAX, and JAXP, etc.</title>
+<p>xml-commons primary goal is to provide Apache projects with a stable version of
+XMl-related externally-defined standards-based code.  This is mainly the various 
+interfaces that you use when programming XML from JAVA: DOM, SAX and JAXP for now.</p>
+<p>This tree is rooted at xml-commons/java/external, and has a build.xml file.
+Basic documentation from each external project is also checked in.</p>
+<ul>
+<li>Current (Feb-02) status:</li>
+<li>No significant changes from Jan-02</li>
+<li>Current (Jan-02) status:</li>
+<li>DOM L2 - full set of interfaces (including HTML stuff) from w3c.org</li>
+<li>SAX 2.0 from megginson.com, plus minor bugfixes. Note that SAX
+is currently maintained at
+<link href="http://sax.sourceforge.net/">http://sax.sourceforge.net/</link>
+( we need to update and cross-check with them soon!)</li>
+<li>JAXP 1.1.3-HEAD from Sun, with current bugfixes by edwingo@apache.org</li>
+</ul>
+<p>Issues Jan-02: our current SAX and JAXP code may not pass the current
+J2EE CTS test suite, since we have bugfixes above what those CTS tests
+mandate.  If you don't know what that is, you don't care; otherwise ask
+on commons-dev for an update.</p>
+    </section>
+
+    <section id="java">
+      <title>Apache-authored code</title>
+<p>xml-commons' secondary goal is to provide a project space for small
+XML-related utilities that are being used in <strong>multiple</strong> other xml.apache.org 
+projects.  In an effort to simplify and reduce dependency headaches, we'll
+probably accept new projects only fairly slowly (this is in contrast to
+the much more open
+<link href="http://jakarta.apache.org/commons/">jakarta-commons</link> project).
+In particular, code submitted here should probably have minimal dependencies:
+possibly only depending on DOM/SAX/JAXP and Ant (for builds).</p>
+<ul>
+<li>Current (Nov-02) status:</li>
+<li>org.apache.xml.resolver.Resolver: Norm Walsh's entity resolver utility now released
+as a separate distribution, see <link href="#releases">Releases</link>.</li>
+<li>Current (Feb-02) status:</li>
+<li>org.apache.env.Which - a simple environment check utility for
+xml-related items in your JVM's environment: see xml-commons/java/which.xml</li><li>org.apache.xml.resolver.Resolver: Norm Walsh's entity resolver utility now checked in!</li>
+<li>(to be voted in) Jeff Turner's DOCTYPE changer</li>
+<li>Current (Jan-02) status:</li>
+<li>org.apache.env.Which - a simple environment check utility for
+xml-related items in your JVM's environment: see xml-commons/java/which.xml</li><li>(to be submitted) Norm Walsh's entity resolver utility</li>
+<li>(to be voted in) Jeff Turner's DOCTYPE changer</li>
+</ul>
+    </section>
+
+    <section id="releases">
+      <title>Where can I download releases?</title>
+<p>The xml-commons-resolver-1.0 release 12-Nov-02 is available in our
+<link href="site:download">distribution directory</link>
+and includes:
+</p>
+<ul>
+<li>This release includes just the 1.0 XmlResolver component, by request from coccoon-dev and others.
+It is released for users who just want to use the Resolver and don't need the rest
+of xml-commons.  Pending discussion on commons-dev, we believe that future xml-commons
+releases will be separated out in this manner (external, resolver, which etc). </li>
+</ul>
+
+<p>The xml-commons-1.0.b2 release 06-Feb-02 is available in our
+<link href="site:download">distribution directory</link>
+and includes:
+</p>
+<ul>
+<li>The previous contents from the 1.0.b1 release (minor javadoc fixes may have been made)</li>
+<li>Various LICENSE.* and README.* files for our external sources</li>
+<li>New code! org.apache.xml.resolver.Resolver: Norm Walsh's entity resolver utility
+is now checked in and building!</li>
+</ul>
+
+<p>The xml-commons-1.0.b1 release 11-Jan-02 is available in our
+<link href="site:download">distribution directory</link>
+and includes the following code:
+</p>
+<ul>
+<li>java/build/which.jar containing:</li>
+<li>org.apache.env.Which - a simple environment check utility for
+xml-related items in your JVM's environment: 1.0 funtionality working</li>
+<li>java/external/build/xml-apis.jar containing:</li>
+<li>DOM Level 2 including all base files and HTML and CSS DOMs; from
+<link href="http://www.w3.org/DOM/">w3c.org</link></li>
+<li>JAXP code roughly equivalent to JAXP 1.1.3; for reference releases
+from Sun, see
+<link href="http://java.sun.com/xml/">java.sun.com/xml</link></li>
+<li>SAX 2.0-r2-prerelease and SAX2-ext-1.0; plus bugfixes to
+org.xml.sax.helpers.ParserAdapter (make compile in JDK 1.1.x) and AttributesImpl (minor
+removeAttribute bug); from megginson.com although SAX maintenance has
+now moved to
+<link href="http://sax.sourceforge.net/">sax.sourceforge.net</link></li>
+</ul>
+
+<p>Future 'b' or beta releases leading up to a gold 1.0 release will
+be discussed on our <link href="#mailing">mailing list</link>.  Likely releases
+might address points such as:
+</p>
+<ul>
+<li>Improvements or submissions to org.apache.env.Which</li>
+<li>A new submission of an entity resolver from Norman Walsh</li>
+<li>A specific version of backlevel JAXP 1.1 that will work with
+Sun's J2EE CTS conformance tests, if enough people request it</li>
+<li>Specific versions of SAX, if the xml.apache.org community
+requests it and wants to update to a newer shipped release of SAX, perhaps
+SAX 2R2pre3 or later</li>
+</ul>
+    </section>
+
+    <section id="build">
+      <title>Building from local sources</title>
+<p>
+If you have done <code>'svn checkout xml-commons'</code> (see below) then you have local
+sources of all components and all documentation sources. There is a high-level
+build file that will also call the other sub-build files for each component.
+Just do <code>'ant -projecthelp'</code> to get started.
+</p>
+
+<p>
+The documentation for the xml-commons project is built using Apache Forrest.
+If you have Forrest installed then just type <code>'forrest'</code> in the
+top-level xml-commons directory. Otherwise see the
+<link href="ext:commons">Apache XML Commons</link> website
+documentation.
+</p>
+    </section>
+
+    <section id="mailing">
+      <title>How can I find out more?</title>
+<p>We have a project mailing list ... commons-dev&lt;at&gt;xml.apache.org
+... Ask your questions or bring your suggestions there,
+or to general&lt;at&gt;xml.apache.org
+</p>
+<ul>
+<li>To subscribe to commons-dev
+... commons-dev-subscribe&lt;at&gt;xml.apache.org</li>
+<li>To un-subscribe from commons-dev
+... commons-dev-unsubscribe&lt;at&gt;xml.apache.org</li>
+<li>To send an email to commons-dev
+... commons-dev&lt;at&gt;xml.apache.org</li>
+</ul>
+
+    <p>To help you keep up with the changes to the repository,
+      subscribe to ... commons-cvs&lt;at&gt;xml.apache.org
+    </p>
+    </section>
+
+    <section id="cvs">
+      <title>Where can I get the source code?</title>
+<p>The xml-commons source code is available through the
+<link href="http://svn.apache.org/repos/asf/xml/commons/">ASF Subversion repository</link>
+or
+<link href="http://svn.apache.org/viewvc/xml/commons/">browse</link>.
+See
+<link href="http://www.apache.org/dev/#svn">SVN overview</link>.
+</p>
+    </section>
+
+    <section id="history">
+      <title>History</title>
+<p>See the separate document <link href="site:history">History of XML Commons</link>
+for the proposal to establish the xml-commons project and for the record of the
+vote on 2001-04-26.
+</p>
+    </section>
+
+    <section id="licenses">
+      <title>Licenses</title>
+<p>
+See <link href="site:licenses">information about licensing</link>.
+</p>
+    </section>
+  </body>
+</document>

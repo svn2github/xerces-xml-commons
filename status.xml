@@ -1,0 +1,520 @@
+<?xml version="1.0"?>
+<!--
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.
+ * The ASF licenses this file to You under the Apache License, Version 2.0
+ * (the "License"); you may not use this file except in compliance with
+ * the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+-->
+<status>
+
+  <developers>
+<person name="Shane Curcuru" email="curcuru@apache.org" id="curcuru" />
+<person name="David Crossley" email="crossley@apache.org" id="crossley" />
+<person name="Neil Graham" email="neilg@ca.ibm.com" id="neilg" />
+<person name="Ilene Seelemann" email="ilene@ca.ibm.com" id="ilene" />
+<person name="Norman Walsh" email="ndw@apache.org" id="ndw" />
+<person name="Michael Glavassevich" email="mrglavas@apache.org" id="mrglavas" />
+<person name="Morris Kwan" email="mkwan@ca.ibm.com" id="mkwan" />
+<person name="Jeremias Maerki" email="jeremias@apache.org" id="jeremias" />
+<person name="Cameron McCormack" email="cam@apache.org" id="cam" />
+<person name="Volunteer needed" email="commons-dev@xml.apache.org" id="open"/>
+    <!-- Add more people here -->
+  </developers>
+
+  <todo>
+    <actions priority="high">
+      <action context="build" dev="open">
+        The 'build dist' for resolver is not picking up the tests and examples
+        in xml-commons/java/tests/resolver/
+      </action>
+      <action context="build" dev="open">
+        Fix resolver.xml build file to have -src and -bin distros.
+      </action>
+      <action context="build" dev="open">
+        Ensure proper line-endings in .zip and .tar.gz
+        (evidently .zip is for Win and .tar.gz is for UNIX.
+      </action>
+      <action context="docs" dev="open">
+        Finish attending to license inconsistencies as per:
+        <link href="http://marc.theaimsgroup.com/?l=xml-commons-dev&amp;m=106255258125081">Re: some issues with docs: license review</link>
+      </action>
+      <action context="docs" dev="open">
+        Finish initial website. Follow procedure in
+        <link href="howto-forrest.html">How-to Forrest</link>
+      </action>
+      <action context="docs" dev="open">
+        Update the Resolver
+        <link href="components/resolver/resolver-release-notes.html">release notes</link>.
+      </action>
+      <action context="code" dev="neilg">
+        Update versions of external DOM/SAX/JAXP code to best-possible that still passes TCK-JAXP-1.2.
+        <link href="http://issues.apache.org/eyebrowse/ReadMsg?listName=commons-dev@xml.apache.org&amp;msgNo=39">making TCK-compliant API's common</link>
+        (Actually is neilg,ilene)
+      </action>
+      <action context="build" dev="open">
+        Establish efficient distribution mirrors
+        and change the download link on the xml-commons website. See doc
+        <link href="http://cvs.apache.org/~bodewig/mirror.html">Making your downloads mirrorable</link> and the infrastructure@ list.
+      </action>
+      <action context="build" dev="open">
+        Decide how to build separate distributable docs for each "component",
+        and how they will also be published to xml-commons website
+        (since resolver, which, etc. will get shipped as individual components,
+        even though they live in the same project).
+        Best if xdocs content can remain in /java with their code.
+        See email:
+        <link href="http://marc.theaimsgroup.com/?l=xml-commons-dev&amp;m=103736060229424">draft website for xml-commons using Forrest</link>
+        and
+        <link href="http://marc.theaimsgroup.com/?l=forrest-dev&amp;m=103967656107408">a website with separate distributable components</link>
+      </action>
+      <action context="code" dev="open">
+        Fix the bugs that are listed in the 
+        <link href="site:issues">Bug database</link> for "XmlCommons".
+      </action>
+    </actions>
+    <actions priority="medium">
+      <action context="architecture" dev="open">
+        Basic consensus building/comments about explicitly shipping various 
+        portions of xml-commons as separate components.
+        See email:
+        <link href="http://marc.theaimsgroup.com/?l=xml-commons-dev&amp;m=103766277714207&amp;w=2">[PROPOSAL] xml-commons project organization: several subprojects
+        </link>
+      </action>
+      <action context="build" dev="open">
+        Decide directory layout. See email:
+        <link href="http://marc.theaimsgroup.com/?l=xml-commons-dev&amp;m=103734209214955">Repository layout</link>
+      </action>
+      <action context="docs" dev="open">
+        Replace the README file at
+        <link href="http://xml.apache.org/commons/dist/">http://xml.apache.org/commons/dist/</link>
+      </action>
+    </actions>
+    <actions priority="low">
+      <action context="docs" dev="open">
+        Better overview doc of why xml-commons has it's own sets of DOM/SAX/JAXP; also 
+        basic docs on TCK compliance etc.
+      </action>
+      <action context="architecture" dev="open">
+        Discussion and concensus on packaging of external DOM/SAX/JAXP interfaces (xml-apis.jar etc.) and better jar filenames with a release version number.
+      </action>
+    </actions>
+  </todo>
+
+  <changes>
+    <!-- Add new releases here -->
+    
+    <release version="xml-commons-resolver-1.3-dev" date="not-yet-released">
+      <action type="update" context="docs" dev="crossley">
+        Added <link href="site:resolver/release-notes">release notes</link> for some of the main items.
+      </action>
+      <action type="fix" context="code" dev="crossley" due-to="Earl Hood" fixes-bug="45209">
+        Use the setting from system property "xml.catalog.verbosity".
+      </action>
+    </release>
+
+    <release version="xml-commons-external-1.4.01" date="2009-12-15">
+      <action type="add" context="code" dev="mrglavas">
+       Added classes and method signatures introduced by JAXP 1.4.
+      </action>
+      <action type="add" context="code" dev="mrglavas">
+       Added the StAX 1.0 API (JSR 173). Sources based off of the distribution from Apache Geronimo.
+      </action>
+      <action type="add" context="code" dev="mrglavas">
+       Added the Java Language Binding for the Element Traversal API (org.w3c.dom.ElementTraversal).
+      </action>
+      <action type="add" context="code" dev="mrglavas">
+       Added default implementations to SchemaFactory for the XML Schema 1.0 and 1.1 
+       language identifiers. See the
+       <link href="http://www.w3.org/TR/xmlschema11-1/#nonnormative-language-ids">XML Schema 1.1</link>
+       specification for more information.
+      </action>
+      <action type="fix" context="code" dev="mrglavas" due-to="Brett Finnell" fixes-bug="41931">
+       Fixed bugs in SchemaFactory and XPathFactory which caused them to always use the
+       system ClassLoader when searching for META-INF/services files instead of the
+       ClassLoader that would be used to load the concrete factory class.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Updated each of the JAXP factory classes so that they treat an empty string value
+       for their system property as if it had not been set. Previously the factories would 
+       make a futile attempt to create an instance of a class named "" and then fail.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed the FactoryFinders so that they no longer catch and ignore ThreadDeath
+       and serious VM errors such as an OutOfMemoryError or a StackOverflowError.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed the default implementation of DatatypeFactory.createDurationDayTime(long)
+       so that it behaves according to the JAXP specification. Previously it was just 
+       delegating to DatatypeFactory.newDuration(long) which has different behaviour
+       than the createDurationDayTime method.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Corrected the default implementations of DatatypeFactory.newDurationYearMonth() 
+       and DatatypeFactory.newDurationDayTime() so that they behave according to the 
+       JAXP specification. These methods must reject lexical values which are not valid 
+       instances of xs:yearMonthDuration and xs:dayTimeDuration. They were not doing so
+       before.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed bugs which could cause NullPointerExceptions to be thrown from the default
+       implementations of Duration.getYears(), Duration.getMonths(), etc...
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed bugs in the DatatypeFactory.newDurationDayTime() and 
+       DatatypeFactory.newDurationYearMonth() methods where BigIntegers
+       were being created for DatatypeConstants.FIELD_UNDEFINED values
+       instead of assigning the value to null in the Duration.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Implemented minor performance improvements in XMLGregorianCalendar.equals()
+       and Duration.equals(). If the given object is "this" object return true 
+       immediately.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Eliminated an unnecessary conversion to String in Duration.multiply(int).
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Updated the File to URI conversion code in StreamResult so that it is consistent 
+       with StreamSource.
+      </action>
+      <action type="fix" context="docs" dev="mrglavas">
+       Fixed miscellaneous typographical errors in the Javadocs.
+      </action>
+    </release>
+    
+    <release version="xml-commons-external-1.3.05" date="2009-12-15">
+      <action type="fix" context="code" dev="mrglavas" due-to="Brett Finnell" fixes-bug="41931">
+       Fixed bugs in SchemaFactory and XPathFactory which caused them to always use the
+       system ClassLoader when searching for META-INF/services files instead of the
+       ClassLoader that would be used to load the concrete factory class.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Updated each of the JAXP factory classes so that they treat an empty string value
+       for their system property as if it had not been set. Previously the factories would 
+       make a futile attempt to create an instance of a class named "" and then fail.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed the FactoryFinders so that they no longer catch and ignore ThreadDeath
+       and serious VM errors such as an OutOfMemoryError or a StackOverflowError.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed the default implementation of DatatypeFactory.createDurationDayTime(long)
+       so that it behaves according to the JAXP specification. Previously it was just 
+       delegating to DatatypeFactory.newDuration(long) which has different behaviour
+       than the createDurationDayTime method.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Corrected the default implementations of DatatypeFactory.newDurationYearMonth() 
+       and DatatypeFactory.newDurationDayTime() so that they behave according to the 
+       JAXP specification. These methods must reject lexical values which are not valid 
+       instances of xs:yearMonthDuration and xs:dayTimeDuration. They were not doing so
+       before.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed bugs which could cause NullPointerExceptions to be thrown from the default
+       implementations of Duration.getYears(), Duration.getMonths(), etc...
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed bugs in the DatatypeFactory.newDurationDayTime() and 
+       DatatypeFactory.newDurationYearMonth() methods where BigIntegers
+       were being created for DatatypeConstants.FIELD_UNDEFINED values
+       instead of assigning the value to null in the Duration.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Implemented minor performance improvements in XMLGregorianCalendar.equals()
+       and Duration.equals(). If the given object is "this" object return true 
+       immediately.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Eliminated an unnecessary conversion to String in Duration.multiply(int).
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Updated the File to URI conversion code in StreamResult so that it is consistent 
+       with StreamSource.
+      </action>
+      <action type="fix" context="docs" dev="mrglavas">
+       Fixed miscellaneous typographical errors in the Javadocs.
+      </action>
+    </release>
+    
+    <release version="xml-commons-external-1.2.06" date="2009-12-15">
+      <action type="update" context="code" dev="mrglavas">
+       Modified the FactoryFinder and SecuritySupport classes to prevent them from being extended or instantiated.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Eliminated the creation of temporary Boolean objects in the SecuritySupport classes.
+      </action>
+      <action type="fix" context="docs" dev="mrglavas" due-to="Fernando Nasser" fixes-bug="37076">
+       Fixed the Implementation-Vendor and Implementation-URL entries in the jar manifest.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Eliminated the creation of short lived StringBuffer and String objects in each of the FactoryFinder
+       classes. The debug print method calls were creating instances of StringBuffer and String which were 
+       never read.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Updated each of the JAXP factory classes so that they treat an empty string value
+       for their system property as if it had not been set. Previously the factories would 
+       make a futile attempt to create an instance of a class named "" and then fail.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed a bug in StreamResult where it was not escaping non-ASCII characters in its conversion of 
+       a java.io.File object to a system identifier.
+      </action>
+      <action type="fix" context="docs" dev="mrglavas">
+       Fixed miscellaneous typographical errors in the Javadocs.
+      </action>
+    </release>
+
+    <release version="xml-commons-external-1.3.04" date="2006-11-22">
+      <action type="add" context="code" dev="jeremias, cam, mrglavas">
+       Added Java Language Bindings for SAC 1.3 (The Simple API for CSS), SMIL and SVG 1.1.
+       These three packages that were formerly published by Apache Batik are now included
+       in the new xml-apis-ext.jar.
+      </action>
+      <action type="fix" context="docs" dev="mrglavas">
+        Fixed errors in the usage examples for the JAXP 1.3 Validation and XPath APIs.
+        Namespace-awareness needs to be set to true on the DocumentBuilderFactory.
+      </action>
+      <action type="add" context="code" dev="mrglavas">
+       Added SchemaFactoryLoader. This class was removed from the JAXP 1.3 specification before 
+       it was finalized but was mistakenly included in Java 5. It only exists here (and in JAXP
+       1.4) for compatiblity reasons. Applications should avoid using it.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Made the behaviour of the jaxp.debug property consistent across all of the FactoryFinder 
+       classes. If the value of the property is "false" then the debug field is set to false.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Modified the FactoryFinder and SecuritySupport classes to prevent them from being extended or instantiated.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Eliminated the creation of temporary Boolean objects in the SecuritySupport classes.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Eliminated the creation of short lived StringBuffer and String objects in each of the FactoryFinder
+       classes. The debug print method calls were creating instances of StringBuffer and String which were 
+       never read.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Added a serialVersionUID to TransformerException to restore serialization compatiblity. It had
+       been broken by a previous modification to this class.
+      </action>
+      <action type="fix" context="code" dev="mrglavas" due-to="Nathan Beyer" fixes-bug="37267">
+       Serialization compatibility of QName was broken in JAXP 1.3 when the serialVersionUID
+       changed from -9120448754896609940 (which was the original one introduced in JAX-RPC 1.0)
+       to 4418622981026545151. Restored the original serialVersionUID and provided a system
+       property called org.apache.xml.namespace.QName.useCompatibleSerialVersionUID which will
+       select 4418622981026545151 as the serialVersionUID when the property is set to "1.0".
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Added a readObject() method to QName to allow older versions of the class which didn't 
+       have a prefix field to be deserialized correctly.
+      </action>
+      <action type="fix" context="docs" dev="mrglavas" due-to="Fernando Nasser" fixes-bug="37076">
+       Fixed the Implementation-Vendor and Implementation-URL entries in the jar manifest.
+      </action>
+      <action type="update" context="code" dev="mrglavas">
+       Modified the SAX XMLReaderFactory and ParserFactory so that they use a PrivilegedAction (through
+       the SecuritySupport class) for looking up system properties.
+      </action>
+      <action type="fix" context="code" dev="mkwan">
+       Fixed a bug in the factory finding algorithm used by XPathFactory for META-INF/services files.
+       Previously these files were being read as if they were properties files. The correct format of
+       a service file is a newline-separated list of unique concrete provider-class names.
+      </action>
+      <action type="fix" context="code" dev="mrglavas">
+       Fixed a bug in the factory finding algorithm used by SchemaFactory for META-INF/services files.
+       Previously these files were being read as if they were properties files. The correct format of
+       a service file is a newline-separated list of unique concrete provider-class names.
+      </action>
+    </release>
+
+    <release version="xml-commons-resolver-1.2" date="2006-11-22">
+      <action type="update" context="docs" dev="crossley">
+        Added <link href="site:resolver/release-notes">release notes</link> for some of the main items.
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="Jacob Kjome" fixes-bug="38562">
+        XCatalog support.
+      </action>
+      <action type="fix" context="code" dev="ndw">
+        Added the reason to "Failed to create InputSource" message.
+      </action>
+      <action type="fix" context="code" dev="ndw">
+        Fixed the use of "file: URLs". 
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="Dave Brosius" fixes-bug="35078">
+        Fixed improper use of String.replace
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="Paul Merchant, Jr." fixes-bug="28719">
+        Resolver generates an incorrect base URL when user.dir is "/".
+      </action>
+      <action type="add" context="code" dev="ndw">
+        Now supports systemIdSuffix and uriSuffix as defined in the XML Catalogs V1.1Committee Specification.
+      </action>
+      <action type="add" context="code" dev="ndw">
+        Added basic JUnit tests.
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="elharo AT metalab.unc.edu" fixes-bug="38562">
+        ResolvingXMLReader was not namespace aware.
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="Jeroen N. Witmond" fixes-bug="25262">
+        Find longest match in rewrites. REWRITE_SYSTEM and REWRITE_URI didn't work as specified.
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="Stefan Reisner" fixes-bug="19311">
+        Detect and report unterminated comments in text catalogs.
+      </action>
+      <action type="fix" context="code" dev="ndw" due-to="Ella Belisario" fixes-bug="16336">
+        Set an EntityResolver on the SAX parser to be used for new XML documents that are
+        encountered as a result of the document() function, xsl:import, or xsl:include.
+      </action>
+    </release>
+
+    <release version="xml-commons-1.0" date="not-yet-released">
+      <action type="add" context="docs" dev="crossley">
+        Published the new website. Hooray.
+      </action>
+      <action type="add" context="docs" dev="crossley"
+        due-to="Nicola Ken Barozzi" due-to-email="nicolaken@apache.org">
+        Added the brilliant 
+        <link href="http://issues.apache.org/eyebrowse/BrowseList?listName=commons-dev@xml.apache.org&amp;by=thread&amp;from=320776">xml-commons logo</link>.
+      </action>
+      <action type="add" context="build" dev="crossley">
+        Added xml-commons/readme-build.txt to start to explain the build system.
+      </action>
+      <action type="update" context="docs" dev="crossley">
+        Fixed some license issues in various areas.
+      </action>
+      <action type="update" context="docs" dev="crossley">
+        Improved the build process for docs and consistency between the
+        website and the distribution. Integrated javadocs with website.
+      </action>
+      <action type="add" context="docs" dev="crossley">
+        Added some ToDo items and noted some issues in 
+        <link href="howto-forrest.html">How-to Forrest</link>.
+      </action>
+      <action type="add" context="docs" dev="curcuru">
+        Added some content as overview for each component.
+        Added some ToDo items.
+      </action>
+      <action type="add" context="docs" dev="crossley">
+        Added placeholder docs and tabs for components.
+      </action>
+      <action type="add" context="docs" dev="crossley">
+        Built demo website using Forrest. Gleaned content from
+        <code>xml-commons/README.html</code>
+      </action>
+    </release>
+
+    <release version="xml-commons-resolver-1.1" date="2003-11-05">
+      <action type="add" context="docs" dev="crossley"
+        due-to="Mark Diggory" due-to-email="mdiggory@latte.harvard.edu">
+        Annotated example CatalogManager.properties for Resolver
+        (see <link href="http://marc.theaimsgroup.com/?l=xml-commons-dev&amp;m=106273408211244">discussion</link>)
+        and new <link href="components/resolver/tips.html">Tips</link> page.
+      </action>
+      <action type="add" context="docs" dev="crossley">
+        Copied the docs built by forrest into the distribution and linked
+        to javadocs.
+      </action>
+      <action type="add" context="docs" dev="ndw">
+        Added brief descriptions of the following new functionality to the
+        <link href="site:components/resolver/release-notes">release notes</link> ...
+      </action>
+      <action type="add" context="code" dev="ndw">
+        The <code>CatalogManager</code> class is no longer static. It is now
+        possible to instantiate several catalog managers and each manager
+        can manage several catalogs.
+      </action>
+      <action type="add" context="code" dev="ndw">
+        System catalogs are always loaded.
+      </action>
+      <action type="add" context="code" dev="ndw">
+        Tests/Examples available in the <code>tests/resolver/</code> directory.
+      </action>
+      <action type="add" context="code" dev="ndw">
+        Bootstrap resolver for loading catalog files. Avoids the Catch-22
+        of having to resolve the catalog.dtd before the resolver is in action.
+      </action>
+    </release>
+
+    <release version="xml-commons-resolver-1.0" date="2002-11-12">
+      <action type="add" context="build" dev="curcuru">
+        This release includes just the 1.0 XmlResolver component, by request
+        from coccoon-dev and others. It is released for users who just want
+        to use the Resolver and don't need the rest of xml-commons.
+        Pending discussion on commons-dev, we believe that future xml-commons
+        releases will be separated out in this manner (external, resolver,
+        which, etc).
+      </action>
+    </release>
+
+    <release version="xml-commons-1.0b2" date="2002-02-06">
+      <action type="add" context="docs" dev="curcuru">
+        Various LICENSE.* and README.* files for our external sources.
+      </action>
+      <action type="add" context="code" dev="curcuru">
+        New code! org.apache.xml.resolver.Resolver: Norm Walsh's
+        <link href="site:components/resolver/overview">entity resolver</link>
+        utility is now checked in and building!
+      </action>
+      <action type="add" context="code">
+        Minor javadoc fixes.
+      </action>
+    </release>
+
+    <release version="xml-commons-1.0b1" date="2002-01-11">
+      <action type="add" context="code" dev="curcuru">
+        <link href="site:components/which/overview">Which</link> -
+        org.apache.env.Which - a simple environment check utility for
+        xml-related items in your JVM's environment: 1.0 funtionality working.
+      </action>
+      <action type="add" context="code" dev="curcuru">
+        <link href="site:components/external/overview">External</link> -
+        java/external/build/xml-apis.jar containing the follow packages:
+      </action>
+      <action type="add" context="code" dev="curcuru">
+        DOM Level 2 including all base files and HTML and CSS DOMs; from
+        <link href="http://www.w3.org/DOM/">w3c.org</link>
+      </action>
+      <action type="add" context="code" dev="curcuru">
+        JAXP code roughly equivalent to JAXP 1.1.3; for reference releases
+        from Sun, see
+        <link href="http://java.sun.com/xml/">java.sun.com/xml</link>
+      </action>
+      <action type="add" context="code" dev="curcuru">
+        SAX 2.0-r2-prerelease and SAX2-ext-1.0; plus bugfixes to
+        org.xml.sax.helpers.ParserAdapter (make compile in JDK 1.1.x)
+        and AttributesImpl (minor removeAttribute bug); from megginson.com
+        although SAX maintenance has now moved to
+        <link href="http://sax.sourceforge.net/">sax.sourceforge.net</link>
+      </action>
+    </release>
+
+    <release version="0.1" date="2001-04-26">
+      <action type="add" context="build" dev="curcuru">
+        Project started. See <link href="history.html">history</link>.
+      </action>
+    </release>
+  </changes>
+      <!-- Some action types have associated images. By default, images are
+      defined for 'add', 'fix', 'remove' and 'update'. If you add
+      src/documentation/resources/images/<foo>.jpg images, these will
+        automatically be used for entries of type <foo>. -->
+      <!-- Sample action:
+      <action dev="JB" type="fix" context="code"
+        due-to="Joe Contributor" due-to-email="joec@apache.org">
+        Fixed a bug in the Foo class.
+      </action>
+      -->
+</status>

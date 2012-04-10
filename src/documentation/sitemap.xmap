@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<map:sitemap xmlns:map="http://apache.org/cocoon/sitemap/1.0">
+ <map:pipelines>
+  <map:pipeline>
+    <map:match pattern="**/resolver-*.html">
+      <map:generate src="{project:content.xdocs}/{1}/resolver-{2}.xml"/>
+      <!-- Wild assumption about the location of DocBook stylesheets.
+           Edit to suit your system.
+      <map:transform src="file:///usr/share/sgml/docbook/xsl-stylesheets/xhtml/docbook.xsl"/>
+      <map:transform src="file:///opt/local/share/xsl/docbook-xsl/xhtml/docbook.xsl"/>
+        -->
+      <map:transform src="file:///opt/local/share/xsl/docbook-xsl/xhtml/docbook.xsl"/>
+      <map:serialize/>
+    </map:match>
+  </map:pipeline>
+ </map:pipelines>
+</map:sitemap>

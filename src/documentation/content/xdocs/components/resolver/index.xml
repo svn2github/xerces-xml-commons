@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "document-v12.dtd">
+<document> 
+  <header> 
+    <title>Resolver overview</title> 
+  </header> 
+  <body> 
+    <section id="overview">
+      <title>Overview</title>
+      <ul>
+        <li>
+          <link href="resolver-article.html">XML Entity and URI Resolvers</link>
+          - article which thoroughly explains the need and use.
+        </li>
+        <li>
+          <link href="resolver-release-notes.html">Release Notes</link>
+          - lists the changes since the 1.0 release.
+        </li>
+        <li>
+          <link href="../apidocs/resolver/index.html">API docs</link>
+          - the complete Javadocs explain the code.
+        </li>
+        <li>
+          <link href="tips.html">Tips</link>
+          - various things to help you get started, such as configuration
+          files, default catalogs, and hints for configuring some tools.
+        </li>
+      </ul>
+    </section>
+
+    <section id="info">
+      <title>Further information</title>
+      <ul>
+        <li>
+          <link href="http://www.oasis-open.org/committees/entity/">OASIS
+          Entity Resolution Technical Committee</link>
+        </li>
+        <li>Mail discussion archives for the
+          <link href="http://lists.oasis-open.org/archives/entity-resolution/">OASIS TC</link>
+          and
+          <link href="http://lists.oasis-open.org/archives/entity-resolution-comment/">public comments</link>.
+        </li>
+      </ul>
+    </section>
+
+  </body>
+</document>

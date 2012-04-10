@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "document-v12.dtd">
+<document> 
+  <header> 
+    <title>How to produce xml-commons website with Apache Forrest</title> 
+  </header> 
+  <body> 
+    <section id="overview">
+      <title>Overview</title>
+      <p>
+        This is the procedure for building the xml-commons website
+        with Apache Forrest.
+      </p>
+    </section>
+
+    <section id="install">
+      <title>Install Forrest version 0.7 on localhost</title>
+      <p>
+        Follow the document:
+        <link href="site:forrest/your-project">Using
+        Forrest</link>
+      </p>
+    </section>
+
+    <section id="content">
+      <title>Edit the content</title>
+<source><![CDATA[
+vi src/documentation/content/xdocs/*.xml
+]]></source>
+    </section>
+
+    <section id="build">
+      <title>Build it and view it</title>
+<source><![CDATA[
+cd xml-commons
+forrest
+]]></source>
+      <p>which validates and builds the docs.
+        If you want to only validate the xdocs then do
+        <code>'forrest validate-xdocs'</code>. You can get even faster
+        turnaround for developing the docs by using <code>'forrest run'</code>
+        to run a live forrest webapp. When finished, do 
+        <code>'forrest'</code> to build the full site.
+      </p>
+    </section>
+
+    <section id="xml-site">
+      <title>Updating the website</title>
+      <p>Copy everything in <code>./build/site</code> over to the xml-site
+        repository at <code>xml-site/targets/commons</code> and commit.
+      </p>
+      <p>There is a cronjob on www.apache.org that does a regular cvs checkout
+        to refresh the website.
+      </p>
+    </section>
+
+    <section id="other">
+      <title>Other notes</title>
+<p>
+There are some other general notes at <code>xml-commons/readme-build.txt</code>
+</p>
+
+<p>
+A project sitemap has been added at
+<code>src/documentation/sitemap.xmap</code>
+There is a hard-coded path in our sitemap to the DocBook XSL stylesheets.
+If that is different on your system, then tweak the sitemap.xmap to suit.
+</p>
+
+<p>Try to keep our skinconf.xml and forrest.properties
+in sync with the Forrest "fresh-site" stuff.
+</p>
+    </section>
+
+  </body>
+</document>

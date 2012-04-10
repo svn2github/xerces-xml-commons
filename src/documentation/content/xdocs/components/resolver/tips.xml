@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "document-v12.dtd">
+<document> 
+  <header> 
+    <title>Resolver tips</title> 
+  </header> 
+  <body> 
+    <section id="intro">
+      <title>Introduction</title>
+      <p>This is a collection of various things to help you get started,
+        such as configuration files and default catalogs. Of course there is
+        lots of explanation in the main
+        <link href="resolver-article.html">documentation</link>.
+        These are some additional resources.
+      </p>
+    </section>
+
+    <section id="properties">
+      <title>Annotated <code>CatalogManager.properties</code></title>
+      <p>
+        See this example
+        <link href="CatalogManager.properties"><code>CatalogManager.properties</code></link>
+        file (shown below). Place it where your Java applications can find it.
+      </p>
+<source><![CDATA[
+######################################################################## 
+# CatalogManager provides an interface to the catalog properties.
+# Properties can come from two places: from system properties or
+# from a CatalogManager.properties file. This class provides a
+# transparent interface to both, with system properties preferred 
+# over property file values.
+
+#######################################################################
+# Catalog Files:
+# The semicolon-delimited list of catalog files.
+# Example: catalogs=./xcatalog;/share/doctypes/catalog
+
+catalogs=../conf/xml-catalog.xml
+
+#######################################################################
+# Relative Catalogs:
+# If false, relative catalog URIs are made absolute with respect to the
+# base URI of the CatalogManager.properties file. This setting only 
+# applies to catalog URIs obtained from the catalogs property in the
+# CatalogManager.properties file
+# Example: relative-catalogs = [yes|no]
+
+relative-catalogs=yes
+
+#######################################################################
+# Verbosity:
+# If non-zero, the Catalog classes will print informative and debugging
+# messages. The higher the number, the more messages.
+# Example: verbosity = [0..99]
+
+verbosity=99
+
+#######################################################################
+# Prefer:
+# Which identifier is preferred, "public" or "system"?
+# Example: xml.catalog.prefer = [public|system]
+
+prefer=system
+
+#######################################################################
+# Static-catalog:
+# Should a single catalog be constructed for all parsing, or should a
+# different catalog be created for each parser?
+# Example: static-catalog = [yes|no]
+
+static-catalog=yes
+
+#######################################################################
+# Allow-oasis-xml-catalog-pi
+# If the source document contains "oasis-xml-catalog" processing 
+# instructions, should they be used?
+# Example: allow-oasis-xml-catalog-pi = [yes|no]
+
+allow-oasis-xml-catalog-pi=yes
+
+#######################################################################
+# catalog-class-name
+# If you're using the convenience classes 
+# org.apache.xml.resolver.tools.*, this setting allows you to specify
+# an alternate class name to use for the underlying catalog.
+# Example: catalog-class-name=org.apache.xml.resolver.Resolver
+]]></source>
+    </section>
+
+    <section id="debug">
+      <title>Debug</title>
+      <p>
+        Raise the "verbosity" parameter.
+      </p>
+      <p>
+        Use 
+        "<link href="http://ngrep.sf.net/">ngrep</link>"
+        to ensure no network traffic ('ngrep dtd').
+      </p>
+    </section>
+
+    <section id="resources">
+      <title>Other helpful resources</title>
+      <p>Apache Cocoon uses the entity resolver. See the doc
+        <link href="http://cocoon.apache.org/2.1/userdocs/concepts/catalog.html">Entity resolution with catalogs</link>.
+      </p>
+      <p>Apache Forrest uses Cocoon and the entity resolver. See the doc
+        <link href="http://forrest.apache.org/docs/validation.html">XML Validation</link> and tips for 
+        <link href="http://forrest.apache.org/docs/catalog.html">configuration</link> of xml editors.
+      </p>
+      <p>
+        <link href="http://ant.apache.org/">Apache Ant</link>
+        uses the entity resolver. See "Core Types =&gt; XMLCatalog".
+      </p>
+      <p>Apache Xerces uses the entity resolver. See the doc
+        <link href="http://xerces.apache.org/xerces2-j/faq-xcatalogs.html">Using XML Catalogs</link>.
+      </p>
+      <p>
+        <link href="http://excalibur.apache.org/">Apache Excalibur</link>
+        has the 
+        <code>org.apache.excalibur.xml.DefaultEntityResolver</code>
+        which was developed in Cocoon then moved to Excalibur so that it would
+        be more widely available.
+        This hooks the resolver into the xml framework. It is available in
+        the excalibur-xmlutil package.
+      </p>
+    </section>
+
+  </body>
+</document>

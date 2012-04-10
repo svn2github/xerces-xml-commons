@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<!DOCTYPE document PUBLIC "-//APACHE//DTD Documentation V1.2//EN" "document-v12.dtd">
+<document> 
+  <header> 
+    <title>History of XML Commons</title> 
+    <authors>
+      <person name="Shane Curcuru" email="curcuru@apache.org"/> 
+    </authors> 
+  </header> 
+  <body> 
+
+    <section id="proposal">
+      <title>xml-subproject-proposal-commons-v1.1</title>
+<source><![CDATA[
+List:     xml-apache-general
+Subject:  [VOTE] Proposal: new xml-commons subproject for standards-based files
+From:     Shane_Curcuru@lotus.com
+Date:     2001-04-17 16:08:07
+
+I propose a new xml.apache.org/xml-commons subproject to fulfill the need
+for a central repository for various XML standards-based files and common
+tools.
+
+COMMITTERS-PLEASE-VOTE! Although I'm not sure of the exact voting procedure
+for creating whole new subprojects, I'm hoping to see a bunch of +1's to
+start with; feel free to either reply-to or use the handy mini-xml ballot
+below.
+
+NON-COMMITTERS-PLEASE-DISCUSS! While votes from non-committers are not
+binding your discussion and insights are very valuable!
+
+Key: committer="your_apache_login" email="your@preferred.email.address"
+  Leave committer blank if you aren't; vote must be +1 | 0 | -1
+  Add comment(s) if you like on specific issues
+
+ballot committer="" email=""
+  vote issue="xml-subproject-proposal-commons-v1.1" vote
+=""comment/comment/vote
+  vote issue="xml-subproject-proposal-commons-v1.1-committers" vote
+=""comment/comment/vote
+/ballot
+
+xml-subproject-proposal-commons-v1.1
+Proposal: form a new xml.apache.org subproject called xml-commons to
+fulfill the below needs.
+
+(0) Rationale:
+Many xml.apache.org projects use and ship with sets of similar
+externally-defined standards-based code; differences in versioning and
+configuration of this code often make developing and using our projects
+more difficult.  A common place for all xml.apache.org projects to get DOM,
+SAX, JAXP, and other externally-defined code would be a fairly low-cost and
+low-maintenance way to alleviate these difficulties.  Having a subproject
+and a community focused on cross-xml-subproject issues will also help drive
+better cross-project coordination and tooling.
+
+(0.1) Programming Languages: While the coding details of Java/C/Perl/etc
+are obviously different, the core concept is the same: a central repository
+for all xml.apache.org projects to share common interfaces and utilities.
+We should start with xml-commons/java, xml-commons/c, and xml-commons/perl
+since these languages are in current use in various xml.apache.org
+subprojects today.
+
+
+(1) Scope of this subproject:
+
+(1.1) Common externally-defined standards:
+This includes the packages: org.w3c.dom.**, org.xml.sax.**, and javax.xml.
+**  This is designed to essentially be an xml.apache.org-specific holding
+place for commonly-used interfaces/headers that are created outside of
+Apache.  This subproject should provide guidelines and build scripts to aid
+xml.apache.org groups to easily use these common files in a common manner
+across all subprojects.  This subproject should provide some basic
+versioning abilities so that xml.apache.org projects temporarily using
+new/beta/updated/proposed versions of these specs can continue to get their
+code from this area.
+
+(1.2) Common xml-oriented utilities:
+We should also include additional utilities/common code in this subproject,
+like current copies of bsf.jar, stylebook, servlet API classes, etc.  This
+could also include code that did originate in an Apache project, that we
+wanted to centralize the use of: SystemIDResolver, XML Serializers, etc.
+
+(1.3) General project starting guidelines for future directions/scope:
+While the details of guidelines for this work should be finalized by the
+community that forms it (along with input from the other xml.apache.org
+projects who will be using this code), there are some basics to start with:
+- Communicate status regularly with general@xml.apache.org and with other
+subprojects
+- Clearly document and checkin 'best practices' for usage of xml-commons
+code in other subprojects
+- Proactively work with other subprojects to implement and improve our
+'best practices'
+- Provide upgrade paths and help; deprecate (or equivalent) old API's
+before removing, so other subprojects have ample time to upgrade.
+- Test and document all non-standards-based code; provide tests/additional
+documentation for standards-based code
+
+(1.4) General guidelines for future directions/scope:
+Note this is firstly a subproject to make life inside of xml.apache.org
+easier, to enable us to more efficiently develop nifty XML projects.  As we
+gain experience in developing this subproject, an obvious future direction
+for this community will be to work on a potential AXDK (Apache XML
+Development Kit) that would be a meta-packaging-project composed out of
+several xml projects together.  The AXDK would be a way to make life for
+end-users easier: a single package of various Apache XML tools that works
+'out of the box'. (AXDK naming credit to kellyc I think?)
+
+(1.5) Interaction with other subprojects
+Additional guidelines can be drawn up on general@xml.apache.org for this
+subproject, and then documented and checked in.  These should include both
+how other xml subprojects should use these resources in their development
+cycles, as well as how all xml subprojects should package these resources
+when creating public, shipped distributions (to avoid version conflicts,
+etc.)  This subproject's community, along with general@xml.apache.org, will
+need to draw up guidelines for code within this subproject as well.
+
+
+(2) Identify the initial source from which the subproject is to be
+populated:
+Standards-based sources would be obtained from the relevant owners/creators
+and checked into the project repository. A basic build.xml file and apache
+project usage guidelines would need to be created.  Possible legal review
+would be needed for licensed files (one solution might be to waive the
+Apache license on these files).  For common xml-oriented utilities, the
+initial sources can be moved in from other xml.apache.org subprojects (cf.
+potential org.apache.xml.utils.SystemIdResolver from xml-xalan).
+
+
+(3) Identify the xml.apache.org resources to be created
+
+(3.1) mailing list(s)
+xml-commons-dev
+(ed note: added xml-commons-cvs as well -Shane)
+
+(3.2) CVS repositories
+xml-commons
+
+(3.3) Bugzilla
+program: Commons
+components: External Standards, Common XML Utils
+
+
+xml-subproject-proposal-commons-v1.1-committers
+A sub-issue that I'd like people to vote on separately for whichever of the
+below option(s) they like best.
+(4) Identify the initial set of committers
+
+(4.a) [vote-multiple] kellyc, curcuru, rubys
+(4.b) [vote-multiple] one committer from each xml.apache.org subproject
+that wants to volunteer, plus at least one PMC member (for projects that
+don't get someone volunteered)
+(4.c) [vote-multiple] all current xml.apache.org committers
+
+/xml-subproject-proposal-commons-v1.1-committers
+
+/xml-subproject-proposal-commons-v1.1
+
+
+(*) Important cross-reference:
+http://jakarta.apache.org/commons/index.html
+Jakarta is currently working on a similar, yet different, tool/util/common
+code area.  While we can steal a lot of their ideas, I think the needs of
+xml.apache.org will be different than Jakarta, so we should make our own
+community decision on how to do this.  Many thanks to the nice format for a
+proposal that I plagarized.  8-)
+
+- Shane shane_curcuru@lotus.com curcuru@apache.org
+]]></source>
+    </section>
+
+    <section id="proposal-votes">
+      <title>xml-subproject-proposal-commons-v1.1-vote-count-26-Apr-01</title>
+<p>Below follows the votes cast to create this subproject</p>
+<p>---- From open general@xml.apache.org mailing list through 3pm 26-Apr-01 ----
+</p>
+<p>Original proposal at:
+<link href="http://marc.theaimsgroup.com/?l=xml-apache-general&amp;m=987524447023862">http://marc.theaimsgroup.com/?l=xml-apache-general&amp;m=987524447023862</link>
+</p>
+<p>
+---- 17 Total committer +1 votes, plus 13 +1's for 4.c (allow all xml
+committers) ----
+</p>
+<ul>
+<li>+1 4.c Shane Curcuru curcuru@apache.org (my implicit vote with the proposal)</li>
+<li>+1 and 4c Kelly Campbell camk@channelpoint.com</li>
+<li>+1 4.c Arnaud Le Hors lehors@us.ibm.com</li>
+<li>+1, and  4c Tinny Ng tng-xml@ca.ibm.com</li>
+<li>+1, and  4c "Ted Leung" twleung@sauria.com</li>
+<li>+1  (4.c) Elena Litani elena@apache.org</li>
+<li>+1, 4.c Vincent Hardy vhardy@eng.sun.com</li>
+<li>ballot committer="arved" email="asandstrom@accesswave.ca"
+  vote issue="xml-subproject-proposal-commons-v1.1" vote="+1"
+    comment/
+  /vote
+  vote issue="xml-subproject-proposal-commons-v1.1-committers"
+    vote="+1"
+    comment4.(c)/comment
+  /vote
+/ballot
+</li>
+<li>+1 and 4c. Andy Clark andyc@apache.org</li>
+<li>+1 4.c "Jeffrey Rodriguez" jeffreyr_97@hotmail.com</li>
+<li>+1, I vote for the least restrictive option, 4.c. Edwin.Goei@sun.com</li>
+<li>+1 for the proposal. +1 for 4.d - all current xml.apache.org and jakarta.apache.org :-) ( but I can settle for 4.c :-) cmanolache@yahoo.com</li>
+<li>+1 for 4c Donald_Leslie@lotus.com</li>
+<li>+1. Scott Sanders satan@totalsync.com (jakarta committer, don't know if he's an xml committer, but he volunteered to work on coordination with jakarta-commons)</li>
+<li>+1, 4.c Thierry Kormann tkormann@sophia.inria.fr</li>
+<li>+1 from me. Davanum Srinivas dims@yahoo.com</li>
+<li>+1 Scott_Boag@lotus.com</li>
+</ul>
+<ul>
+<li>---- Other comments and non-committer votes ----</li>
+<li>ballot committer="" email="shugal@gmx.de"
+  vote issue="xml-subproject-proposal-commons-v1.1" vote="+1"
+    commentA good and necessary idea! I'd like to contribute here.
+     Also see below./comment
+  /vote
+  vote issue="xml-subproject-proposal-commons-v1.1-committers"
+   vote="4.b or 4.a"
+    commentI'm no committer, but I think we should get the
+     number of committers low at least a this initial stage. Everyone is
+     free to contribute code to one of the actual committers who will
+     check it into CVS if they think it's useful./comment
+  /vote
+/ballot
+</li>
+<li>"Once the /xml-commons repository is set up, I volunteer to check in the
+latest JAXP code into /xml-commons.  Right now there are 3 different
+projects with 3 different versions.  It'd be nice to have just one."  Edwin
+Goei edwingo@sun.com
+</li>
+</ul>
+<p>/xml-subproject-proposal-commons-v1.1-vote-count-26-Apr-01</p>
+    </section>
+  </body>
+</document>
