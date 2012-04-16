@@ -21,11 +21,11 @@
   See the License for the specific language governing permissions and
   limitations under the License.
 -->
-  <Project rdf:about="http://xml.apache.org/commons/components/external/">
+  <Project rdf:about="http://xerces.apache.org/xml-commons/components/external/">
     <created>2007-06-06</created>
     <license rdf:resource="http://usefulinc.com/doap/licenses/asl20" />
     <name>Apache XML Commons External</name>
-    <homepage rdf:resource="http://xml.apache.org/commons/components/external/" />
+    <homepage rdf:resource="http://xerces.apache.org/xml-commons/components/external/" />
     <asfext:pmc rdf:resource="http://xerces.apache.org" />
     <shortdesc>Apache XML Commons External provides an Apache-hosted set of SAX, DOM and JAXP interfaces for use in other xml-based projects.</shortdesc>
     <description>The External components portion of Apache XML Commons contains interfaces that are defined by external standards organizations. For DOM, that's the W3C; for SAX it's David Megginson (http://www.saxproject.org); for JAXP it's Sun. While we could send users to each of the primary sources for these deliverables, keeping our own versions of these in the XML Commons repository gives us a number of advantages: 1) Simplicity of downloads; users get the whole product from one place, 2) Better version control; we can only take fixes we want and add Apache-specific changes, 3) Better overview documentation of how these interfaces fit into the XML processing world, 4) More chance for cross-project community building within Apache projects.</description>
@@ -64,14 +64,14 @@
     </release>
     <repository>
       <SVNRepository>
-        <location rdf:resource="http://svn.apache.org/repos/asf/xml/commons/"/>
-        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/xml/commons/"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/xerces/xml-commons/"/>
+        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/xerces/xml-commons/"/>
       </SVNRepository>
     </repository>
     <maintainer>
       <foaf:Person>
         <foaf:name>XML Commons Development Team</foaf:name>
-          <foaf:mbox rdf:resource="mailto:mailto:commons-dev@xml.apache.org"/>
+        <foaf:mbox rdf:resource="mailto:xml-commons-dev@xerces.apache.org"/>
       </foaf:Person>
     </maintainer>
     <asfext:implements><asfext:Standard>

@@ -23,11 +23,11 @@
          xmlns:asfext="http://projects.apache.org/ns/asfext#"
          xmlns:foaf="http://xmlns.com/foaf/0.1/">
          <!--  With many thanks to dreid who made this all so damn easy! -curcuru -->
-  <Project rdf:about="http://xml.apache.org/">
+  <Project rdf:about="http://xerces.apache.org/xml-commons/components/resolver/">
     <created>2006-02-17</created>
     <license rdf:resource="http://usefulinc.com/doap/licenses/asl20" />
     <name>Apache XML Commons Resolver</name>
-    <homepage rdf:resource="http://xml.apache.org/commons/components/resolver/" />
+    <homepage rdf:resource="http://xerces.apache.org/xml-commons/components/resolver/" />
     <asfext:pmc rdf:resource="http://xerces.apache.org" />
     <shortdesc>XML Entity and URI Resolver utility class.</shortdesc>
     <description>The XML Commons Resolver can be used in a wide variety of XML parsing, processing and related programs to resolve various public or system identifiers into accessible URLs for use by your application.  The resolver supports several catalog types for mapping, including OASIS XML, OASIS TR 9401 and XCatalog styles.</description>
@@ -52,14 +52,14 @@
     </release>
     <repository>
       <SVNRepository>
-        <location rdf:resource="http://svn.apache.org/repos/asf/xml/commons/"/>
-        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/xml/commons/"/>
+        <location rdf:resource="http://svn.apache.org/repos/asf/xerces/xml-commons/"/>
+        <browse rdf:resource="http://svn.apache.org/viewcvs.cgi/xerces/xml-commons/"/>
       </SVNRepository>
     </repository>
     <maintainer>
       <foaf:Person>
         <foaf:name>XML Commons Development Team</foaf:name>
-          <foaf:mbox rdf:resource="mailto:commons-dev@xml.apache.org"/>
+        <foaf:mbox rdf:resource="mailto:xml-commons-dev@xerces.apache.org"/>
       </foaf:Person>
     </maintainer>
     <asfext:implements>
