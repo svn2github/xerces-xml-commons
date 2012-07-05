@@ -24,6 +24,7 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.Random;
 
 import javax.xml.XMLConstants;
 
@@ -102,6 +103,51 @@ public class QName implements Serializable {
         // If 1.0 use compatibility serialVersionUID
         serialVersionUID = !"1.0".equals(compatPropValue) ? defaultSerialVersionUID : compatabilitySerialVersionUID;
     }
+    
+    private static final int MULTIPLIERS_SIZE = 1 << 5;
+    private static final int MULTIPLIERS_MASK = MULTIPLIERS_SIZE - 1;
+    
+    private static final int[] hashMultipliers;
+    private static final boolean useDefaultHashCodeAlgorithm;
+    static {
+        boolean _useDefaultHashAlgorithm;
+        try {
+            // use a privileged block for reading a system property
+            String valueUseDefaultHashCodeAlgorithm = (String) AccessController.doPrivileged(
+                    new PrivilegedAction() {
+                        public Object run() {
+                            return System.getProperty("javax.xml.namespace.QName.useCompatibleHashCodeAlgorithm");
+                        }
+                    }
+            );
+            _useDefaultHashAlgorithm = (valueUseDefaultHashCodeAlgorithm != null && valueUseDefaultHashCodeAlgorithm.equals("1.0")) ? false : true;
+        }
+        catch (Exception exception) {
+            // use default if any Exceptions
+            _useDefaultHashAlgorithm = true;
+        }
+        useDefaultHashCodeAlgorithm = _useDefaultHashAlgorithm;
+        if (useDefaultHashCodeAlgorithm) {
+            hashMultipliers = new int[MULTIPLIERS_SIZE + 1];
+            final int [] PRIMES = {
+                3,   5,   7,  11,  13,  17,  19,  23,  29,  31,  37,  41,  43,  47,  53,  59, 
+               61,  67,  71,  73,  79,  83,  89,  97, 101, 103, 107, 109, 113, 127, 131, 137, 
+              139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 
+              229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 
+              317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 
+              421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 
+              521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 
+              619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727};
+            // Randomly select multipliers from a set of prime numbers.
+            final Random r = new Random();
+            for (int i = 0; i < hashMultipliers.length; ++i) {
+                hashMultipliers[i] = PRIMES[r.nextInt(PRIMES.length)];
+            }
+        }
+        else {
+            hashMultipliers = null;
+        }
+    }
 
     /**
      * <p>Namespace URI of this <code>QName</code>.</p>
@@ -117,6 +163,11 @@ public class QName implements Serializable {
      * <p>prefix of this <code>QName</code>.</p>
      */
     private String prefix;
+    
+    /**
+     * <p>Hash code for this <code>QName<code>.</p>
+     */
+    private transient int hashCode;
     
     /**
      * <p><code>String</code> representation of this <code>QName</code>.</p>
@@ -348,7 +399,17 @@ public class QName implements Serializable {
      * @return hash code for this <code>QName</code> <code>Object</code>
      */
     public final int hashCode() {
-        return namespaceURI.hashCode() ^ localPart.hashCode();
+        int _hashCode = hashCode;
+        if (_hashCode == 0) {
+            if (useDefaultHashCodeAlgorithm) {
+                _hashCode = hash(localPart) + hash(namespaceURI) * hashMultipliers[MULTIPLIERS_SIZE];
+            }
+            else {
+                _hashCode = namespaceURI.hashCode() ^ localPart.hashCode();
+            }
+            hashCode = _hashCode;
+        }
+        return _hashCode;
     }
 
 	/** 
@@ -492,5 +553,18 @@ public class QName implements Serializable {
         if (prefix == null) {
             prefix = XMLConstants.DEFAULT_NS_PREFIX;
         }
+    }
+    
+    /*
+     * Compute hash code of a string using randomly selected multipliers.
+     */
+    private static int hash(String symbol) {
+        int code = 0;
+        final int length = symbol.length();
+        final int[] multipliers = hashMultipliers;
+        for (int i = 0; i < length; ++i) {
+            code = code * multipliers[i & MULTIPLIERS_MASK] + symbol.charAt(i);
+        }
+        return code;
     }
 }
