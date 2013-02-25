@@ -50,6 +50,16 @@ class NewInstance {
         throws ClassNotFoundException, IllegalAccessException,
             InstantiationException
     {
+        // throw security exception if the calling thread is not allowed to access the package
+        // restrict the access to package as specified in java.security policy
+        SecurityManager security = System.getSecurityManager();
+        if (security != null) {
+            final int lastDot = className.lastIndexOf('.');
+            if (lastDot != -1) {
+                String packageName = className.substring(0, lastDot);
+                security.checkPackageAccess(packageName);
+            }
+        }
         Class driverClass;
         if (classLoader == null) {
             // XXX Use the bootstrap ClassLoader.  There is no way to

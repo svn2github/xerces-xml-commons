@@ -100,6 +100,16 @@ final class FactoryFinder {
         // assert(className != null);
 
         try {
+            // throw security exception if the calling thread is not allowed to access the package
+            // restrict the access to package as specified in java.security policy
+            SecurityManager security = System.getSecurityManager();
+            if (security != null) {
+                final int lastDot = className.lastIndexOf('.');
+                if (lastDot != -1) {
+                    String packageName = className.substring(0, lastDot);
+                    security.checkPackageAccess(packageName);
+                }
+            }
             Class providerClass;
             if (cl == null) {
                 // If classloader is null Use the bootstrap ClassLoader.  

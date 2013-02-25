@@ -298,6 +298,16 @@ final class SchemaFactoryFinder  {
      */
     SchemaFactory createInstance( String className ) {
         try {
+            // throw security exception if the calling thread is not allowed to access the package
+            // restrict the access to package as specified in java.security policy
+            SecurityManager security = System.getSecurityManager();
+            if (security != null) {
+                final int lastDot = className.lastIndexOf('.');
+                if (lastDot != -1) {
+                    String packageName = className.substring(0, lastDot);
+                    security.checkPackageAccess(packageName);
+                }
+            }
             if (debug) debugPrintln("instanciating "+className);
             Class clazz;
             if( classLoader!=null )

@@ -138,6 +138,16 @@ public final class DOMImplementationRegistry {
             StringTokenizer st = new StringTokenizer(p);
             while (st.hasMoreTokens()) {
                 String sourceName = st.nextToken();
+                // throw security exception if the calling thread is not allowed to access the package
+                // restrict the access to package as specified in java.security policy
+                SecurityManager security = System.getSecurityManager();
+                if (security != null) {
+                    final int lastDot = sourceName.lastIndexOf('.');
+                    if (lastDot != -1) {
+                        String packageName = sourceName.substring(0, lastDot);
+                        security.checkPackageAccess(packageName);
+                    }
+                }
                 // Use context class loader, falling back to Class.forName
                 // if and only if this fails...
                 Class sourceClass = null;
