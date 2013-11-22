@@ -70,174 +70,174 @@ import org.xml.sax.SAXException;
  * @version 1.0
  */
 public class DOMCatalogReader implements CatalogReader {
-  /**
-   * Mapping table from QNames to CatalogParser classes.
-   *
-   * <p>Each key in this hash table has the form "elementname"
-   * or "{namespaceuri}elementname". The former is used if the
-   * namespace URI is null.</p>
-   */
-  protected Hashtable namespaceMap = new Hashtable();
+    /**
+     * Mapping table from QNames to CatalogParser classes.
+     *
+     * <p>Each key in this hash table has the form "elementname"
+     * or "{namespaceuri}elementname". The former is used if the
+     * namespace URI is null.</p>
+     */
+    protected Hashtable namespaceMap = new Hashtable();
 
-  /**
-   * Add a new parser to the reader.
-   *
-   * <p>This method associates the specified parserClass with the
-   * namespaceURI/rootElement names specified.</p>
-   *
-   * @param namespaceURI The namespace URI. <em>Not</em> the prefix.
-   * @param rootElement The name of the root element.
-   * @param parserClass The name of the parserClass to instantiate
-   * for this kind of catalog.
-   */
-  public void setCatalogParser(String namespaceURI,
-			       String rootElement,
-			       String parserClass) {
-    if (namespaceURI == null) {
-      namespaceMap.put(rootElement, parserClass);
-    } else {
-      namespaceMap.put("{"+namespaceURI+"}"+rootElement, parserClass);
-    }
-  }
-
-  /**
-   * Get the name of the parser class for a given catalog type.
-   *
-   * <p>This method returns the parserClass associated with the
-   * namespaceURI/rootElement names specified.</p>
-   *
-   * @param namespaceURI The namespace URI. <em>Not</em> the prefix.
-   * @param rootElement The name of the root element.
-   * @return The parser class.
-   */
-  public String getCatalogParser(String namespaceURI,
-				 String rootElement) {
-    if (namespaceURI == null) {
-      return (String) namespaceMap.get(rootElement);
-    } else {
-      return (String) namespaceMap.get("{"+namespaceURI+"}"+rootElement);
-    }
-  }
-
-  /**
-   * Null constructor; something for subclasses to call.
-   */
-  public DOMCatalogReader() { }
-
-  /**
-   * Read a catalog from an input stream.
-   *
-   * <p>This class reads a catalog from an input stream:</p>
-   *
-   * <ul>
-   * <li>Based on the QName of the root element, it determines which
-   * parser to instantiate for this catalog.</li>
-   * <li>It constructs a DOM Document from the catalog and</li>
-   * <li>For each child of the root node, it calls the parser's
-   * parseCatalogEntry method. This method is expected to make
-   * appropriate calls back into the catalog to add entries for the
-   * entries in the catalog. It is free to do this in whatever manner
-   * is appropriate (perhaps using just the node passed in, perhaps
-   * wandering arbitrarily throughout the tree).</li>
-   * </ul>
-   *
-   * @param catalog The catalog for which this reader is called.
-   * @param is The input stream that is to be read.
-   * @throws IOException if the URL cannot be read.
-   * @throws UnknownCatalogFormatException if the catalog format is
-   * not recognized.
-   * @throws UnparseableCatalogException if the catalog cannot be parsed.
-   * (For example, if it is supposed to be XML and isn't well-formed or
-   * if the parser class cannot be instantiated.)
-   */
-  public void readCatalog(Catalog catalog, InputStream is)
-    throws IOException, CatalogException {
-
-    DocumentBuilderFactory factory = null;
-    DocumentBuilder builder = null;
-
-    factory = DocumentBuilderFactory.newInstance();
-    factory.setNamespaceAware(false);
-    factory.setValidating(false);
-    try {
-      builder = factory.newDocumentBuilder();
-    } catch (ParserConfigurationException pce) {
-      throw new CatalogException(CatalogException.UNPARSEABLE);
+    /**
+     * Add a new parser to the reader.
+     *
+     * <p>This method associates the specified parserClass with the
+     * namespaceURI/rootElement names specified.</p>
+     *
+     * @param namespaceURI The namespace URI. <em>Not</em> the prefix.
+     * @param rootElement The name of the root element.
+     * @param parserClass The name of the parserClass to instantiate
+     * for this kind of catalog.
+     */
+    public void setCatalogParser(String namespaceURI,
+            String rootElement,
+            String parserClass) {
+        if (namespaceURI == null) {
+            namespaceMap.put(rootElement, parserClass);
+        } else {
+            namespaceMap.put("{"+namespaceURI+"}"+rootElement, parserClass);
+        }
     }
 
-    Document doc = null;
-
-    try {
-      doc = builder.parse(is);
-    } catch (SAXException se) {
-      throw new CatalogException(CatalogException.UNKNOWN_FORMAT);
+    /**
+     * Get the name of the parser class for a given catalog type.
+     *
+     * <p>This method returns the parserClass associated with the
+     * namespaceURI/rootElement names specified.</p>
+     *
+     * @param namespaceURI The namespace URI. <em>Not</em> the prefix.
+     * @param rootElement The name of the root element.
+     * @return The parser class.
+     */
+    public String getCatalogParser(String namespaceURI,
+            String rootElement) {
+        if (namespaceURI == null) {
+            return (String) namespaceMap.get(rootElement);
+        } else {
+            return (String) namespaceMap.get("{"+namespaceURI+"}"+rootElement);
+        }
     }
 
-    Element root = doc.getDocumentElement();
+    /**
+     * Null constructor; something for subclasses to call.
+     */
+    public DOMCatalogReader() { }
 
-    String namespaceURI = Namespaces.getNamespaceURI(root);
-    String localName    = Namespaces.getLocalName(root);
+    /**
+     * Read a catalog from an input stream.
+     *
+     * <p>This class reads a catalog from an input stream:</p>
+     *
+     * <ul>
+     * <li>Based on the QName of the root element, it determines which
+     * parser to instantiate for this catalog.</li>
+     * <li>It constructs a DOM Document from the catalog and</li>
+     * <li>For each child of the root node, it calls the parser's
+     * parseCatalogEntry method. This method is expected to make
+     * appropriate calls back into the catalog to add entries for the
+     * entries in the catalog. It is free to do this in whatever manner
+     * is appropriate (perhaps using just the node passed in, perhaps
+     * wandering arbitrarily throughout the tree).</li>
+     * </ul>
+     *
+     * @param catalog The catalog for which this reader is called.
+     * @param is The input stream that is to be read.
+     * @throws IOException if the URL cannot be read.
+     * @throws UnknownCatalogFormatException if the catalog format is
+     * not recognized.
+     * @throws UnparseableCatalogException if the catalog cannot be parsed.
+     * (For example, if it is supposed to be XML and isn't well-formed or
+     * if the parser class cannot be instantiated.)
+     */
+    public void readCatalog(Catalog catalog, InputStream is)
+            throws IOException, CatalogException {
 
-    String domParserClass = getCatalogParser(namespaceURI,
-					     localName);
+        DocumentBuilderFactory factory = null;
+        DocumentBuilder builder = null;
 
-    if (domParserClass == null) {
-      if (namespaceURI == null) {
-	catalog.getCatalogManager().debug.message(1, "No Catalog parser for "
-						  + localName);
-      } else {
-	catalog.getCatalogManager().debug.message(1, "No Catalog parser for "
-						  + "{" + namespaceURI + "}"
-						  + localName);
-      }
-      return;
+        factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(false);
+        factory.setValidating(false);
+        try {
+            builder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException pce) {
+            throw new CatalogException(CatalogException.UNPARSEABLE);
+        }
+
+        Document doc = null;
+
+        try {
+            doc = builder.parse(is);
+        } catch (SAXException se) {
+            throw new CatalogException(CatalogException.UNKNOWN_FORMAT);
+        }
+
+        Element root = doc.getDocumentElement();
+
+        String namespaceURI = Namespaces.getNamespaceURI(root);
+        String localName    = Namespaces.getLocalName(root);
+
+        String domParserClass = getCatalogParser(namespaceURI,
+                localName);
+
+        if (domParserClass == null) {
+            if (namespaceURI == null) {
+                catalog.getCatalogManager().debug.message(1, "No Catalog parser for "
+                        + localName);
+            } else {
+                catalog.getCatalogManager().debug.message(1, "No Catalog parser for "
+                        + "{" + namespaceURI + "}"
+                        + localName);
+            }
+            return;
+        }
+
+        DOMCatalogParser domParser = null;
+
+        try {
+            domParser = (DOMCatalogParser) Class.forName(domParserClass).newInstance();
+        } catch (ClassNotFoundException cnfe) {
+            catalog.getCatalogManager().debug.message(1, "Cannot load XML Catalog Parser class", domParserClass);
+            throw new CatalogException(CatalogException.UNPARSEABLE);
+        } catch (InstantiationException ie) {
+            catalog.getCatalogManager().debug.message(1, "Cannot instantiate XML Catalog Parser class", domParserClass);
+            throw new CatalogException(CatalogException.UNPARSEABLE);
+        } catch (IllegalAccessException iae) {
+            catalog.getCatalogManager().debug.message(1, "Cannot access XML Catalog Parser class", domParserClass);
+            throw new CatalogException(CatalogException.UNPARSEABLE);
+        } catch (ClassCastException cce ) {
+            catalog.getCatalogManager().debug.message(1, "Cannot cast XML Catalog Parser class", domParserClass);
+            throw new CatalogException(CatalogException.UNPARSEABLE);
+        }
+
+        Node node = root.getFirstChild();
+        while (node != null) {
+            domParser.parseCatalogEntry(catalog, node);
+            node = node.getNextSibling();
+        }
     }
 
-    DOMCatalogParser domParser = null;
-
-    try {
-      domParser = (DOMCatalogParser) Class.forName(domParserClass).newInstance();
-    } catch (ClassNotFoundException cnfe) {
-      catalog.getCatalogManager().debug.message(1, "Cannot load XML Catalog Parser class", domParserClass);
-      throw new CatalogException(CatalogException.UNPARSEABLE);
-    } catch (InstantiationException ie) {
-      catalog.getCatalogManager().debug.message(1, "Cannot instantiate XML Catalog Parser class", domParserClass);
-      throw new CatalogException(CatalogException.UNPARSEABLE);
-    } catch (IllegalAccessException iae) {
-      catalog.getCatalogManager().debug.message(1, "Cannot access XML Catalog Parser class", domParserClass);
-      throw new CatalogException(CatalogException.UNPARSEABLE);
-    } catch (ClassCastException cce ) {
-      catalog.getCatalogManager().debug.message(1, "Cannot cast XML Catalog Parser class", domParserClass);
-      throw new CatalogException(CatalogException.UNPARSEABLE);
+    /**
+     * Read the catalog behind the specified URL.
+     *
+     * @see #readCatalog(Catalog, InputStream)
+     *
+     * @param catalog The catalog for which we are reading.
+     * @param fileUrl The URL of the document that should be read.
+     *
+     * @throws MalformedURLException if the specified URL cannot be
+     * turned into a URL object.
+     * @throws IOException if the URL cannot be read.
+     * @throws UnknownCatalogFormatException if the catalog format is
+     * not recognized.
+     * @throws UnparseableCatalogException if the catalog cannot be parsed.
+     * (For example, if it is supposed to be XML and isn't well-formed.)
+     */
+    public void readCatalog(Catalog catalog, String fileUrl)
+            throws MalformedURLException, IOException, CatalogException {
+        URL url = new URL(fileUrl);
+        URLConnection urlCon = url.openConnection();
+        readCatalog(catalog, urlCon.getInputStream());
     }
-
-    Node node = root.getFirstChild();
-    while (node != null) {
-      domParser.parseCatalogEntry(catalog, node);
-      node = node.getNextSibling();
-    }
-  }
-
-  /**
-   * Read the catalog behind the specified URL.
-   *
-   * @see #readCatalog(Catalog, InputStream)
-   *
-   * @param catalog The catalog for which we are reading.
-   * @param fileUrl The URL of the document that should be read.
-   *
-   * @throws MalformedURLException if the specified URL cannot be
-   * turned into a URL object.
-   * @throws IOException if the URL cannot be read.
-   * @throws UnknownCatalogFormatException if the catalog format is
-   * not recognized.
-   * @throws UnparseableCatalogException if the catalog cannot be parsed.
-   * (For example, if it is supposed to be XML and isn't well-formed.)
-   */
-  public void readCatalog(Catalog catalog, String fileUrl)
-    throws MalformedURLException, IOException, CatalogException {
-    URL url = new URL(fileUrl);
-    URLConnection urlCon = url.openConnection();
-    readCatalog(catalog, urlCon.getInputStream());
-  }
 }
