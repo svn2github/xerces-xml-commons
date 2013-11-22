@@ -196,6 +196,16 @@ public class DOMCatalogReader implements CatalogReader {
         DOMCatalogParser domParser = null;
 
         try {
+            // throw security exception if the calling thread is not allowed to access the package
+            // restrict the access to package as specified in java.security policy
+            SecurityManager security = System.getSecurityManager();
+            if (security != null) {
+                final int lastDot = domParserClass.lastIndexOf('.');
+                if (lastDot != -1) {
+                    String packageName = domParserClass.substring(0, lastDot);
+                    security.checkPackageAccess(packageName);
+                }
+            }
             domParser = (DOMCatalogParser) Class.forName(domParserClass).newInstance();
         } catch (ClassNotFoundException cnfe) {
             catalog.getCatalogManager().debug.message(1, "Cannot load XML Catalog Parser class", domParserClass);

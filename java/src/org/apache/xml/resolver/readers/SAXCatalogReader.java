@@ -248,6 +248,16 @@ public class SAXCatalogReader implements CatalogReader, ContentHandler, Document
                 }
                 parser.parse(new InputSource(is), spHandler);
             } else {
+                // throw security exception if the calling thread is not allowed to access the package
+                // restrict the access to package as specified in java.security policy
+                SecurityManager security = System.getSecurityManager();
+                if (security != null) {
+                    final int lastDot = parserClass.lastIndexOf('.');
+                    if (lastDot != -1) {
+                        String packageName = parserClass.substring(0, lastDot);
+                        security.checkPackageAccess(packageName);
+                    }
+                }
                 Parser parser = (Parser) Class.forName(parserClass, true, loader != null ? loader : this.getClass().getClassLoader()).newInstance();
                 parser.setDocumentHandler(this);
                 if (bResolver != null) {
@@ -353,6 +363,16 @@ public class SAXCatalogReader implements CatalogReader, ContentHandler, Document
             }
 
             try {
+                // throw security exception if the calling thread is not allowed to access the package
+                // restrict the access to package as specified in java.security policy
+                SecurityManager security = System.getSecurityManager();
+                if (security != null) {
+                    final int lastDot = saxParserClass.lastIndexOf('.');
+                    if (lastDot != -1) {
+                        String packageName = saxParserClass.substring(0, lastDot);
+                        security.checkPackageAccess(packageName);
+                    }
+                }
                 saxParser = (SAXCatalogParser)
                         Class.forName(saxParserClass, true, loader != null ? loader : this.getClass().getClassLoader()).newInstance();
 
@@ -414,6 +434,16 @@ public class SAXCatalogReader implements CatalogReader, ContentHandler, Document
             }
 
             try {
+                // throw security exception if the calling thread is not allowed to access the package
+                // restrict the access to package as specified in java.security policy
+                SecurityManager security = System.getSecurityManager();
+                if (security != null) {
+                    final int lastDot = saxParserClass.lastIndexOf('.');
+                    if (lastDot != -1) {
+                        String packageName = saxParserClass.substring(0, lastDot);
+                        security.checkPackageAccess(packageName);
+                    }
+                }
                 saxParser = (SAXCatalogParser)
                         Class.forName(saxParserClass, true, loader != null ? loader : this.getClass().getClassLoader()).newInstance();
 

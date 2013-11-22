@@ -683,6 +683,16 @@ public class CatalogManager {
                     catalog = new Catalog();
                 } else {
                     try {
+                        // throw security exception if the calling thread is not allowed to access the package
+                        // restrict the access to package as specified in java.security policy
+                        SecurityManager security = System.getSecurityManager();
+                        if (security != null) {
+                            final int lastDot = catalogClassName.lastIndexOf('.');
+                            if (lastDot != -1) {
+                                String packageName = catalogClassName.substring(0, lastDot);
+                                security.checkPackageAccess(packageName);
+                            }
+                        }
                         catalog = (Catalog) Class.forName(catalogClassName).newInstance();
                     } catch (ClassNotFoundException cnfe) {
                         debug.message(1,"Catalog class named '"
